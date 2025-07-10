@@ -36,59 +36,14 @@ There is no standardized, provable way to link creative works together especiall
 
 ### 1. **Lack of Verifiable Attribution for Derivative Content**
 
-* **Source:** [Ethereum Foundation - "Composable Creator Economies" (2024)](https://ethereum.foundation/research/creator-economies/)
-
-  > Highlights that **derivative onchain creative works have no standard for attribution**, leading to disputes over credit, royalties, and originality in tokenized media ecosystems.
-
-* **Source:** [MIT Media Lab - "Creative Derivatives in Web3" (2023)](https://www.media.mit.edu/projects/creative-derivatives/)
-
-  > Notes that **current token standards (ERC-20, ERC-721, etc.) lack native mechanisms for linking derivative works to their origins**, requiring ad hoc, fragile solutions for attribution.
-
----
-
 ### 2. **Existing Citation Models are Social, Not Cryptographic**
-
-* **Source:** [Zora - "Onchain Creator Incentives" (2024)](https://zora.co/blog/creator-incentives)
-
-  > States that **social incentives (e.g., tagging creators) are unenforceable** without cryptographic proofs, creating misaligned incentives in collaborative or remix-heavy content ecosystems.
-
-* **Source:** [Stanford Center for Blockchain Research - "Limitations of Social Attribution" (2023)](https://cbr.stanford.edu/)
-
-  > Demonstrates that **manual citation models in creative platforms are prone to omission, exploitation, and strategic misrepresentation**, especially in financially incentivized environments.
-
----
 
 ### 3. **No Privacy-Preserving Proof Mechanism Exists**
 
-* **Source:** [zkSummit - "Privacy in Creative Proof Systems" (2024)](https://zksummit.com/)
-
-  > Argues that **proving inspiration or derivation typically requires exposing sensitive data (drafts, sources, references)**—a clear violation of creative privacy and IP protection norms.
-
-* **Source:** [Electric Coin Company - "Zero-Knowledge for Data Privacy" (2023)](https://electriccoin.co/)
-
-  > Shows that **zk-proofs enable verifiable statements without revealing sensitive details**, yet **no system currently applies zk-proofs to the creative derivative space.**
-
----
-
 ### 4. **Missing Integration with Onchain Royalty Systems**
-
-* **Source:** [Uniswap Foundation - "Composable Liquidity for Creator Economies" (2024)](https://uniswap.org/blog/composable-liquidity)
-
-  > Highlights that **royalty enforcement is fragmented**, with no standard to **link derivative coins (e.g., Zora CoinV4) with originator revenue streams** programmatically.
-
-* **Source:** [Zora - "Native Royalty Splitting in CoinV4" (2024)](https://zora.co/protocol/coins)
-
-  > Notes that **Zora CoinV4 supports royalty routing but lacks integration with cryptographically provable inspiration chains**, making it difficult to automate downstream revenue splits.
-
----
 
 ### 5. **Creative Economies Need Privacy, Attribution, and Enforcement Together**
 
-* **Source:** [World Economic Forum - "Future of the Creator Economy" (2024)](https://www.weforum.org/reports/creator-economy-futures/)
-
-  > Emphasizes that **privacy, attribution, and enforcement must coexist in decentralized creator economies** to build fair, transparent, and sustainable financial models for digital creativity.
-
----
 ---
 
 
@@ -103,9 +58,6 @@ zkInspire introduces Proof of Inspiration, a privacy-preserving, onchain verific
 
 zkInspire introduces **Proof of Inspiration**, a cryptographic mechanism that allows creators to **prove influence from prior works** without exposing sensitive drafts or creative processes.
 
-By generating **zero-knowledge proofs of derivation**, creators can declare inspiration **onchain**, enabling **automatic attribution and revenue-sharing** enforced at the protocol level.
-
-Inspiration becomes not just social credit—it’s **provable, enforceable, and rewarded**.
 
 ---
 
@@ -113,9 +65,6 @@ Inspiration becomes not just social credit—it’s **provable, enforceable, and
 
 With zkInspire’s integration into **Zora CoinV4 minting flows**, each derivative work can carry **embedded revenue-sharing logic**, sending a portion of royalties back to the origin creator automatically.
 
-No need for trust, negotiations, or third-party platforms—**royalty splits are enforced by smart contracts**, making remix culture sustainable and creator-friendly.
-
-**Every new idea strengthens the original creator’s financial foundation.**
 
 ---
 
@@ -123,19 +72,12 @@ No need for trust, negotiations, or third-party platforms—**royalty splits are
 
 All relationships between original works and their derivatives form an **onchain, cryptographically verifiable inspiration graph**, **preserving privacy while enabling powerful ecosystem analytics**.
 
-Fans, collectors, and curators can trace the lineage of creative works, surfacing **high-value originators** while still respecting creator privacy.
-
-**The creator economy finally gains a structured, provable creative graph.**
 
 ---
 
 ## 4. Seamless Integration with Zora and Uniswap for Market Liquidity
 
 By aligning **Proof of Inspiration** directly with **Zora’s CoinV4 contracts** and **Uniswap liquidity pools**, zkInspire ensures that **derivative works and their coins are automatically tradable** with embedded royalty flows.
-
-This makes creative attribution directly tied to **liquid, onchain market incentives**, bringing sustainable economics to the remix era.
-
-**zkInspire transforms creative influence into provable, liquid value.**
 
 ---
 
