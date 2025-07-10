@@ -192,33 +192,6 @@ sequenceDiagram
 
 ---
 
-## 5.5 Security Properties
-
-| Property             | Guarantee                                      |
-| -------------------- | ---------------------------------------------- |
-| Non-Repudiation      | Binding commitment to creator key              |
-| Privacy Preservation | No disclosure of original work unless opted in |
-| Resistance to Sybil  | Verified with onchain PK + deterministic salt  |
-| Replay Protection    | Unique commitment per work                     |
-
----
-
-## 5.6 Potential Attacks & Mitigations
-
-| Attack Type           | Mitigation                                 |
-| --------------------- | ------------------------------------------ |
-| **Fake Inspiration**  | Requires valid zk-Proof over actual `H_o`  |
-| **False Attribution** | No PoI → No enforced revenue sharing       |
-| **Denial of Service** | zk verifier optimized for low onchain cost |
-
----
-
-## 5.7 Future Extensions
-
-* **Threshold PoI**: zk-aggregated proofs for **multi-inspiration** works.
-* **Encrypted Inspirations**: Homomorphic commitments for privacy-preserving discovery.
-* **Integration with Zora Rewards SDK**: Enhanced for social graph-based reputation rewards.
-
 # 6 Tokenomics & Royalties
 
 ## 6.1 Royalty Calculation Model
