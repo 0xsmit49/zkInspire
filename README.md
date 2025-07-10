@@ -19,7 +19,6 @@ Prove derivative relationships → without revealing what parts, what influence,
 ![Screenshot from 2025-06-22 17-01-25](https://github.com/user-attachments/assets/02a0b6fd-35c8-4275-84e1-eb51669d387c)
 
 ---
----
 
 # Problem Statement
 
@@ -28,56 +27,84 @@ In today’s digital creator economy, inspiration is everywhere but rarely rewar
 There is no standardized, provable way to link creative works together especially in a way that ensures automatic revenue sharing with upstream creators.
 
 
+---
+# Detailed User Flow (With Uniswap, Zora, IPFS)
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as User (Creator)
+    participant Wallet as Wallet (EIP-712 Signer)
+    participant IPFS as IPFS (Offchain Storage)
+    participant zkCircuit as zkCircuit (zkSNARK Generator)
+    participant Verifier as zkVerifier (Onchain)
+    participant InspireGraph as InspireGraph (Zora/ERC-721 Ext.)
+    participant Treasury as Treasury (Royalty Contract)
+    participant Uniswap as Uniswap Router
+    participant GraphQL as Indexer / UI (e.g., The Graph)
+
+    %% 1. Upload Media
+    User->>IPFS: Upload Creative Work (metadata.json + content)
+    IPFS-->>User: contentURI (CID)
+
+    %% 2. Declare Remix
+    User->>Wallet: Sign Remix Declaration (parentId, contentURI)
+    Wallet-->>User: Signature 
+
+    %% 3. Generate Proof
+    User->>zkCircuit: (parentHash, remixHash)
+    zkCircuit-->>User: zkProof, publicSignals
+
+    %% 4. Mint on Zora Protocol
+    User->>Wallet: Sign tx (contentURI, proofHash, royaltyBP)
+    Wallet->>InspireGraph: mintRemixNFT(contentURI, parentId, proof, royalties)
+
+    %% 5. zkProof Validation
+    InspireGraph->>Verifier: verifyProof(proof, publicSignals)
+    Verifier-->>InspireGraph: Success 
+
+    %% 6. Royalty Distribution
+    InspireGraph->>Treasury: Split Royalties (creator, ancestors, platform)
+    Treasury->>Uniswap: Auto-swap portion to $ZORA or $ETH
+    Treasury->>Wallet: Royalty payout in $ZORA/$ETH
+
+    %% 7. Index + Discovery
+    InspireGraph-->>GraphQL: Emit InspirationAdded (Event → Index)
+    GraphQL-->>User: Updated Inspiration Graph + Revenue Flows
+
+```
 
 ---
 
-## **Technical Problem Statement: Verifiable Proof of Inspiration for Creative Works**
+##  Component Breakdown
 
-### 1. **Lack of Verifiable Attribution for Derivative Content**
-
-### 2. **Existing Citation Models are Social, Not Cryptographic**
-
-### 3. **No Privacy-Preserving Proof Mechanism Exists**
-
-### 4. **Missing Integration with Onchain Royalty Systems**
-
-### 5. **Creative Economies Need Privacy, Attribution, and Enforcement Together**
-
----
-
-
-# Solution Statement
-
-zkInspire introduces Proof of Inspiration, a privacy-preserving, onchain verification system for creative works using zero-knowledge proofs. It allows creators to cryptographically prove that a new work was inspired by an existing one without revealing sensitive details of the creative process. This system automatically enforces royalty splits in protocols Zora CoinV4 and Uniswap, aligning attribution with onchain incentives while preserving creator privacy.
-
+| **Layer**        | **Technology**                         | **Role**                                                 |
+| ---------------- | -------------------------------------- | -------------------------------------------------------- |
+| **Storage**      | IPFS                                   | Media (images/audio/video) storage; returns CID.         |
+| **Proof**        | zkSNARK                         | Cryptographic proof of derivation (optional zkML later). |
+| **NFT Mint**     | Zora Protocol (ERC-721 & Extensions)   | Tokenizing creative works as NFTs with inspiration link. |
+| **Royalties**    | Custom contract + Zora/Uniswap         | Splitting & swapping royalties → \$ZORA, \$ETH.          |
+| **Verification** | Onchain zkVerifier (Solidity Verifier) | Validating zkProof commitments on mint.                  |
+| **Discovery**    | The Graph (or custom GraphQL)          | Indexing inspiration graph for search/discovery.         |
 
 ---
 
-## 1. Verifiable Proof of Inspiration with Zero-Knowledge Privacy
+## Royalty Flow with Uniswap Integration
 
-zkInspire introduces **Proof of Inspiration**, a cryptographic mechanism that allows creators to **prove influence from prior works** without exposing sensitive drafts or creative processes.
+1. **X% Royalty** → Sent to parent creators (based on DAG depth & declared splits).
+2. **Y% Platform Fee** → Converted to \$ZORA via Uniswap.
+3. **Referrer Cut** → Routed to referrer wallet.
+4. **Remaining Royalties** → Direct payout to remix creator in \$ETH or \$ZORA.
 
+**Royalty Splitting Example:**
 
----
-
-## 2. Onchain Royalty Splits for Derivative Works
-
-With zkInspire’s integration into **Zora CoinV4 minting flows**, each derivative work can carry **embedded revenue-sharing logic**, sending a portion of royalties back to the origin creator automatically.
-
-
----
-
-## 3. zk-Based Inspiration Graph for Ecosystem Intelligence
-
-All relationships between original works and their derivatives form an **onchain, cryptographically verifiable inspiration graph**, **preserving privacy while enabling powerful ecosystem analytics**.
-
-
----
-
-## 4. Seamless Integration with Zora and Uniswap for Market Liquidity
-
-By aligning **Proof of Inspiration** directly with **Zora’s CoinV4 contracts** and **Uniswap liquidity pools**, zkInspire ensures that **derivative works and their coins are automatically tradable** with embedded royalty flows.
+```plaintext
+Royalty: 10%
+ → 5% → Immediate parent creator
+ → 2% → Ancestors (depth-based)
+ → 2% → Platform (swapped to $ZORA)
+ → 1% → Referrer (if any)
+```
 
 ---
 
